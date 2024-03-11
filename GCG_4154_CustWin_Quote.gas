@@ -1,0 +1,103 @@
+Program.Sub.ScreenSU.Start
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.Global.sQuote.Declare(String,"-1")
+Variable.Global.sOrder.Declare(String)
+Program.Sub.Preflight.End
+
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'Create a database connection
+F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+'Set the Quote Number to a global variable
+V.Global.sQuote.Set(V.Passed.QUOTE)
+'Set the Order Number to a global variable
+V.Global.sOrder.Set(V.Passed.ORDER)
+'Save the Order Information
+F.Intrinsic.Control.CallSub(Quote_won)
+
+F.ODBC.Connection!con.Close
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4154_CustWin_Quote.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.ODBC.Connection!con.Close
+	F.Intrinsic.Control.End
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+
+Program.Sub.Quote_Won.Start
+F.Intrinsic.Control.SetErrorHandler("Quote_Won_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSql.Declare(String)
+
+'Set the basis for the Quote selection
+F.Intrinsic.String.Build("SELECT * FROM GCG_4154_customwindo WHERE REF_ID = '{0}' ",V.Global.sQuote,V.Local.sSql)
+F.ODBC.Connection!con.OpenRecordsetRO("rst",V.local.sSql)
+
+F.Intrinsic.Control.DoUntil(V.ODBC.con!rst.EOF,=,True)
+	F.Intrinsic.String.Build("SELECT * FROM GCG_4154_customwindo WHERE REF_ID = '{0}' AND SUB_ID = '{1}' AND TYPE = '{2}' AND SEQUENCE = '{3}' ",V.Global.sOrder,V.ODBC.con!rst.FieldVal!Sub_ID,V.ODBC.con!rst.FieldVal!Type,V.ODBC.con!rst.FieldVal!Sequence,V.Local.sSql)
+	F.ODBC.Connection!con.OpenLocalRecordsetRW("rstOrd",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.con!rstOrd.EOF,=,True)
+		'Add the Order  for the given Quote number
+		F.ODBC.con!rstOrd.AddNew
+		F.ODBC.con!rstOrd.Set!Ref_ID(V.Global.sOrder)
+		F.ODBC.con!rstOrd.Set!Sub_ID(V.ODBC.con!rst.Fieldval!Sub_ID)
+		F.ODBC.con!rstOrd.Set!Type(V.ODBC.con!rst.Fieldval!Type)
+		F.ODBC.con!rstOrd.Set!Sequence(V.ODBC.con!rst.Fieldval!Sequence)
+	F.Intrinsic.Control.EndIf
+		F.ODBC.con!rstOrd.Set!SelectionID(V.ODBC.con!rst.Fieldval!SelectionID)
+		F.ODBC.con!rstOrd.Set!Checked(V.ODBC.con!rst.Fieldval!Checked)
+	'Update the record
+	F.ODBC.con!rstOrd.Update
+	F.ODBC.con!rstOrd.Close
+
+	'Move to the next recordset
+	F.ODBC.con!rst.MoveNext
+F.Intrinsic.Control.Loop
+
+F.ODBC.con!rst.Close
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Quote_Won_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4154_CustWin_Quote.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.End
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Quote_Won.End
+
+
+Program.Sub.Comments.Start
+${$0$}$GCG_CustWin_Quote$}$Strider$}$10/6/2015
+${$1$}$$}$$}$0$}$17301$}$Post Move To Sales Order Hook$}$10/6/2015 4:27:22 PM$}$(Program: QTE003GI; Screen: )
+
+${$2$}$$}$$}$1$}$4$}$SQL TABLES$}$10/6/2015 4:28:50 PM$}$GCG_CUSTOMWINDOW
+GCG_CUSTWIN_LABEL
+GCG_CUSTWIN_SELECT
+${$2$}$$}$$}$0$}$2$}$ADDITIONAL PROGRAMS$}$10/6/2015 4:27:22 PM$}$GCG_CUSTOM_WINDOW.GAS
+GCG_CUSTOM_WINDOW_BTN.GAS
+GCG_CUSTWIN_LABELS.GAS
+GCG_CUSTWIN_SELECTION.GAS
+${$3$}$0$}$$}$-1$}$-1$}$$}$1/1/1900$}$Add additional user fields to the Order Header, Order Lines, Quote Header, and Quote Lines screens.
+Program.Sub.Comments.End
+
