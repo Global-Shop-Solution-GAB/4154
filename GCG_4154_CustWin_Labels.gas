@@ -1,0 +1,330 @@
+Program.Sub.ScreenSU.Start
+gui.F_CustWin_Maint..create
+gui.F_CustWin_Maint..caption("Custom Window Label Maintenance")
+gui.F_CustWin_Maint..size(6420,5880)
+gui.F_CustWin_Maint..minx(0)
+gui.F_CustWin_Maint..miny(0)
+gui.F_CustWin_Maint..position(0,0)
+gui.F_CustWin_Maint..event(unload,Unload)
+gui.F_CustWin_Maint..alwaysontop(False)
+gui.F_CustWin_Maint..fontname("Tahoma")
+gui.F_CustWin_Maint..fontsize(8)
+gui.F_CustWin_Maint..forecolor(0)
+gui.F_CustWin_Maint..fontstyle(False,False,False,False,)
+gui.F_CustWin_Maint..BackColor(-2147483633)
+gui.F_CustWin_Maint..controlbox(True)
+gui.F_CustWin_Maint..maxbutton(False)
+gui.F_CustWin_Maint..minbutton(True)
+gui.F_CustWin_Maint..mousepointer(0)
+gui.F_CustWin_Maint..moveable(True)
+gui.F_CustWin_Maint..sizeable(False)
+gui.F_CustWin_Maint..ShowInTaskBar(True)
+gui.F_CustWin_Maint..titlebar(True)
+gui.F_CustWin_Maint.frmQuote.create(frame)
+gui.F_CustWin_Maint.frmQuote.caption("Frame")
+gui.F_CustWin_Maint.frmQuote.size(2625,510)
+gui.F_CustWin_Maint.frmQuote.position(200,200)
+gui.F_CustWin_Maint.frmQuote.visible(True)
+gui.F_CustWin_Maint.frmQuote.borderstyle(0)
+gui.F_CustWin_Maint.frmQuote.fontname("Tahoma")
+gui.F_CustWin_Maint.frmQuote.fontsize(8)
+gui.F_CustWin_Maint.frmSelection.create(frame)
+gui.F_CustWin_Maint.frmSelection.caption("Frame")
+gui.F_CustWin_Maint.frmSelection.size(5805,4395)
+gui.F_CustWin_Maint.frmSelection.position(200,775)
+gui.F_CustWin_Maint.frmSelection.visible(True)
+gui.F_CustWin_Maint.frmSelection.borderstyle(0)
+gui.F_CustWin_Maint.frmSelection.fontname("Tahoma")
+gui.F_CustWin_Maint.frmSelection.fontsize(8)
+gui.F_CustWin_Maint.lblScreen.create(label,"Screen",True,1935,255,1,0,-30,True,0,Tahoma,8,-2147483633,0)
+gui.F_CustWin_Maint.lblScreen.parent("frmquote")
+gui.F_CustWin_Maint.lblScreen.defaultvalue("")
+gui.F_CustWin_Maint.lblScreen.controlgroup(0)
+gui.F_CustWin_Maint.gsSelection.create(gsflexgrid)
+gui.F_CustWin_Maint.gsSelection.FixedRows(0)
+gui.F_CustWin_Maint.gsSelection.FixedCols(0)
+gui.F_CustWin_Maint.gsSelection.visible(True)
+gui.F_CustWin_Maint.gsSelection.size(5775,3960)
+gui.F_CustWin_Maint.gsSelection.zorder(0)
+gui.F_CustWin_Maint.gsSelection.position(0,0)
+gui.F_CustWin_Maint.gsSelection.enabled(True)
+gui.F_CustWin_Maint.gsSelection.parent("frmselection")
+gui.F_CustWin_Maint.cmdSave.create(button)
+gui.F_CustWin_Maint.cmdSave.caption("Save")
+gui.F_CustWin_Maint.cmdSave.visible(True)
+gui.F_CustWin_Maint.cmdSave.size(855,375)
+gui.F_CustWin_Maint.cmdSave.zorder(0)
+gui.F_CustWin_Maint.cmdSave.position(0,3995)
+gui.F_CustWin_Maint.cmdSave.enabled(True)
+gui.F_CustWin_Maint.cmdSave.parent("frmselection")
+gui.F_CustWin_Maint.cmdSave.fontname("Tahoma")
+gui.F_CustWin_Maint.cmdSave.fontsize(8)
+gui.F_CustWin_Maint.cmdSave.event(click,cmdsave_click)
+gui.F_CustWin_Maint.cmdSave.disableonclick(20)
+gui.F_CustWin_Maint.cmdSave.defaultvalue("")
+gui.F_CustWin_Maint.cmdSave.controlgroup(0)
+gui.F_CustWin_Maint.ddlScreen.create(dropdownlist)
+gui.F_CustWin_Maint.ddlScreen.visible(True)
+gui.F_CustWin_Maint.ddlScreen.size(1620,330)
+gui.F_CustWin_Maint.ddlScreen.zorder(0)
+gui.F_CustWin_Maint.ddlScreen.position(0,195)
+gui.F_CustWin_Maint.ddlScreen.enabled(True)
+gui.F_CustWin_Maint.ddlScreen.parent("frmquote")
+gui.F_CustWin_Maint.ddlScreen.fontname("Tahoma")
+gui.F_CustWin_Maint.ddlScreen.fontsize(8)
+gui.F_CustWin_Maint.ddlScreen.event(click,ddlscreen_click)
+gui.F_CustWin_Maint.ddlScreen.defaultvalue("")
+gui.F_CustWin_Maint.ddlScreen.controlgroup(0)
+gui.F_CustWin_Maint.ddlScreen.tabstop(True)
+gui.F_CustWin_Maint.ddlScreen.tabindex(1)
+gui.F_CustWin_Maint.cmdSave.tabstop(True)
+gui.F_CustWin_Maint.cmdSave.tabindex(2)
+
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.Global.iType.Declare(Long,-1)
+Variable.Global.sSQL.Declare(String)
+Program.Sub.Preflight.End
+
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'Connection to database
+F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+'Call the styles on the flexgrid
+F.Intrinsic.Control.CallSub(Gsselection_styles)
+
+'Populate the DropDown List with the Header and Lines
+Gui.F_CustWin_Maint.ddlScreen.AddItem("Header",0)
+Gui.F_CustWin_Maint.ddlScreen.AddItem("Lines",1)
+
+'Load the label text in the recordset
+F.Intrinsic.Control.CallSub(Load_labeltext)
+
+'Display the Form
+Gui.F_CustWin_Maint..Show
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4154_CustWin_Labels.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+
+Program.Sub.Unload.Start
+F.Intrinsic.Control.SetErrorHandler("Unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'Terminate the connection with the database
+F.ODBC.Connection!con.Close
+'End the script
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4154_CustWin_Labels.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.ODBC.Connection!con.Close
+	F.Intrinsic.Control.End
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Unload.End
+
+
+Program.Sub.gsSelection_Styles.Start
+F.Intrinsic.Control.SetErrorHandler("gsSelection_Styles_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'Set the Row count on the flexgrid
+Gui.F_CustWin_Maint.gsSelection.Rows(1)
+Gui.F_CustWin_Maint.gsSelection.Rows(2)
+Gui.F_CustWin_Maint.gsSelection.FixedRows(1)
+'Set the Col count on the flexgrid
+Gui.F_CustWin_Maint.gsSelection.Cols(2)
+'Set the Row Headers
+Gui.F_CustWin_Maint.gsSelection.TextMatrix(0,0,"Label#")
+Gui.F_CustWin_Maint.gsSelection.TextMatrix(1,0,"Label Text")
+'Set the Column width
+Gui.F_CustWin_Maint.gsSelection.SetColumnPercentages(".15:.80")
+'Style for Column 0
+Gui.F_CustWin_Maint.gsSelection.BuildStyle(2,0,"type","Locked",True)
+Gui.F_CustWin_Maint.gsSelection.BuildStyle(2,0,"Format","alignment","4")
+'Style for Column 1 Fixedrow
+Gui.F_CustWin_Maint.gsSelection.BuildStyle(1,1,"type","Locked","true")
+Gui.F_CustWin_Maint.gsSelection.BuildStyle(1,1,"Format","alignment","4")
+'Apply style for the Header row
+Gui.F_CustWin_Maint.gsSelection.ApplyStyle(0,1)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("gsSelection_Styles_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4154_CustWin_Labels.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.gsSelection_Styles.End
+
+
+program.sub.cmdsave_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdsave_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sText.Declare(String)
+V.Local.iSeq.Declare(Long)
+
+'If screen is not selected, Exit the sub
+F.Intrinsic.Control.If(V.Global.iType,=,-1)
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.String.Build("SELECT * FROM GCG_4154_CustWin_Lab WHERE TYPE = '{0}' ORDER BY SEQUENCE ASC ",V.Global.iType,V.Global.sSQL)
+F.ODBC.Connection!con.OpenLocalRecordsetRW("rst",V.Global.sSQL)
+'cycles through all of the labels saving them
+F.Intrinsic.Control.DoUntil(V.ODBC.con!rst.EOF,=,True)
+	F.Intrinsic.Math.Add(V.ODBC.con!rst.FieldValLong!SEQUENCE,1,V.Local.iSeq)
+	Gui.F_CustWin_Maint.gsSelection.GetTextMatrix(1,V.Local.iSeq,V.Local.sText)
+	F.Intrinsic.Control.If(V.Local.sText,=,"")
+		F.ODBC.con!rst.Set!LABELTXT("User Info")
+	F.Intrinsic.Control.Else
+		F.ODBC.con!rst.Set!LABELTXT(V.Local.sText)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rst.Update
+	F.ODBC.con!rst.MoveNext
+F.Intrinsic.Control.Loop
+F.ODBC.con!rst.Close
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdsave_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4154_CustWin_Labels.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdsave_click.end
+
+
+Program.Sub.Load_LabelText.Start
+F.Intrinsic.Control.SetErrorHandler("Load_LabelText_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.iType.Declare(Long)
+V.Local.iSequence.Declare(Long)
+
+'this will have to step through all of the rows the first time this program is ran but not any time after
+'For the type Hearer/Lines
+F.Intrinsic.Control.For(V.Local.iType,0,1,1)
+	F.Intrinsic.String.Build("SELECT * FROM GCG_4154_CustWin_Lab WHERE TYPE = '{0}' ",V.Local.iType,V.Global.sSQL)
+	F.ODBC.Connection!con.OpenRecordsetRW("rst",V.Global.sSQL)
+	'If the EOF is true
+	F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,True)
+		'For sequence number 0-49
+		F.Intrinsic.Control.For(V.Local.iSequence,0,49,1)
+			'Add new record
+			F.ODBC.con!rst.AddNew
+			F.ODBC.con!rst.Set!Type(V.Local.iType)
+			F.ODBC.con!rst.Set!Sequence(V.Local.iSequence)
+			F.ODBC.con!rst.Set!Labeltxt("User Info")
+			F.ODBC.con!rst.Update
+		F.Intrinsic.Control.Next(V.Local.iSequence)
+
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rst.Close
+F.Intrinsic.Control.Next(V.Local.iType)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Load_LabelText_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4154_CustWin_Labels.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Load_LabelText.End
+
+
+program.sub.ddlscreen_click.start
+F.Intrinsic.Control.SetErrorHandler("ddlscreen_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.iSeq.Declare(Long,1)
+
+'Set the Index of the selected screen to a Global variable
+V.Global.iType.Set(V.Screen.F_CustWin_Maint!ddlScreen.ListIndex)
+'If screen is not selected, Exit the sub
+F.Intrinsic.Control.If(V.Global.iType,=,-1)
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+Gui.F_CustWin_Maint.gsSelection.Visible(false)
+'Reset theFLexgrid
+F.Intrinsic.Control.CallSub(Gsselection_styles)
+Gui.F_CustWin_Maint.gsSelection.Rows(51)
+F.Intrinsic.String.Build("SELECT LABELTXT FROM GCG_4154_CustWin_Lab WHERE TYPE = '{0}' ORDER BY SEQUENCE ASC ",V.Global.iType,V.Global.sSQL)
+F.ODBC.Connection!Con.OpenRecordsetRO("rst",V.Global.sSQL)
+F.Intrinsic.Control.DoUntil(V.ODBC.con!rst.EOF,=,True)
+	Gui.F_CustWin_Maint.gsSelection.TextMatrix(1,V.Local.iSeq,V.ODBC.con!rst.FieldVal!Labeltxt)
+	Gui.F_CustWin_Maint.gsSelection.TextMatrix(0,V.Local.iSeq,V.Local.iSeq)
+	Gui.F_CustWin_Maint.gsSelection.ApplyStyle(V.Local.iSeq,2)
+	F.Intrinsic.Math.Add(V.Local.iSeq,1,V.Local.iSeq)
+	F.ODBC.con!rst.MoveNext
+F.Intrinsic.Control.Loop
+F.ODBC.Con!rst.Close
+Gui.F_CustWin_Maint.gsSelection.Visible(true)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("ddlscreen_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4154_CustWin_Labels.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.ddlscreen_click.end
+
+
+Program.Sub.Comments.Start
+${$0$}$GCG_CustWin_Labels$}$SS1$}$10/6/2015
+${$2$}$$}$$}$1$}$4$}$SQL TABLES$}$10/6/2015 4:26:23 PM$}$GCG_CUSTOMWINDOW
+GCG_CUSTWIN_LABEL
+GCG_CUSTWIN_SELECT
+${$2$}$$}$$}$0$}$2$}$ADDITIONAL PROGRAMS$}$10/6/2015 4:25:33 PM$}$GCG_CUSTOM_WINDOW.GAS
+GCG_CUSTOM_WINDOW_BTN.GAS
+GCG_CUSTWIN_QUOTE.GAS
+GCG_CUSTWIN_SELECITON.GAS
+${$3$}$0$}$$}$-1$}$-1$}$$}$1/1/1900$}$Add additional user fields to the Order Header, Order Lines, Quote Header, and Quote Lines screens.
+Program.Sub.Comments.End
+
