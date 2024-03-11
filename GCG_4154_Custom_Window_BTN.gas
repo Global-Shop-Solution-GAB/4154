@@ -1,0 +1,53 @@
+Program.Sub.ScreenSU.Start
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Program.Sub.Preflight.End
+
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.Intrinsic.Control.If(V.Caller.Hook,!=,12010)
+	V.Passed.000203.Set("Addl Fields")
+F.Intrinsic.Control.Else
+	V.Passed.000210.Set("Addl Fields")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4145_Custom_Window_BTN.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.End
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+
+Program.Sub.Comments.Start
+${$0$}$GCG_Custom_Window_BTN$}$SS1$}$8/5/2015
+${$1$}$$}$$}$3$}$12010$}$OES0201I-POPULATE-HOOK$}$10/6/2015 4:22:51 PM$}$(Program: ORD201; Screen: OES0201I)
+
+${$1$}$$}$$}$2$}$11560$}$OES0200A-POPULATE-HOOK$}$10/6/2015 4:22:35 PM$}$(Program: ORD200; Screen: OES0200A)
+
+${$1$}$$}$$}$1$}$10260$}$Populate Hook$}$10/6/2015 4:22:20 PM$}$(Program: QTE201; Screen: QTS0201L)
+
+${$1$}$$}$$}$0$}$10710$}$QTS0200A-POPULATE-HOOK$}$10/6/2015 4:21:50 PM$}$(Program: QTE200; Screen: QTS0200A)
+
+${$2$}$$}$$}$1$}$4$}$SQL TABLES$}$10/6/2015 4:24:24 PM$}$GCG_CUSTOMWINDOW
+GCG_CUSTWIN_LABEL
+GCG_CUSTWIN_SELECT
+${$2$}$$}$$}$0$}$2$}$ADDITIONAL PROGRAMS$}$10/6/2015 4:21:50 PM$}$GCG_CUSTOM_WINDOW.GAS
+GCG_CUSTWIN_LABELS
+GCG_CUSTWIN_SELECTION
+GCG_CUSTWIN_QUOTE
+${$3$}$0$}$$}$0$}$-1$}$$}$12:00:00 AM$}$Add additional user fields to the Order Header, Order Lines, Quote Header, and Quote Lines screens.
+Program.Sub.Comments.End
+
